@@ -11,14 +11,14 @@ export default function Header({ type }) {
     //삼항 연산자를 사용해 메인/서브 구분    type의 값이 main인지 물어보고 참이면 logoURL에 ./img/logo_w.png 거짓이면 ./img/logo_b.png를 넣음
 
     type === "main"
-        ? (logoURL = "./img/logo_w.png")
+        ? (logoURL = "/img/logo_w.png")
         : (logoURL = "/img/logo_b.png");
 
     return (
         <header className={{ type }}>
             <h1>
                 <Link to="/">
-                    <img src={`${process.env.PUBLIC_URL}/img/logo_w.png`} alt="LOGO" />
+                    <img src={process.env.PUBLIC_URL + logoURL} alt="LOGO" />
                 </Link>
                 <span>Here comes logo is </span>
             </h1>
