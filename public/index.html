@@ -6,9 +6,34 @@
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>React App</title>
-  <script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	a34202fd3240869d37623fa485b0a265"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a34202fd3240869d37623fa485b0a265"></script>
+  <style>
+    .defaults {
+      position: absolute;
+      top: -999999px;
+    }
 
+    .mask {
+      width: 100%;
+      height: 100vh;
+      background: #111;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      opacity: 1;
+      transition: opacity 2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font: 20px/1 'arial';
+      color: #fff;
+    }
+
+    .mask.off {
+      opacity: 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,6 +45,7 @@
     const mask = document.querySelector(".mask");
     let tags = "";
     const baseURL = "https://shinsuho1.github.io/react_start-1018";
+    // const baseURL = "https://22-07-react.github.io/react_pf";
     const imgs = [
       baseURL + "/img/Community.jpg",
       baseURL + "/img/Department.jpg",
@@ -31,31 +57,47 @@
     const vids = [
       baseURL + "/img/vid.mp4"
     ]
-    createDOM();
-    function createDOM() {
-      imgs.forEach(el => {
-        tags += `<img src=${el} />`
-      });
-      vids.forEach(el => {
-        tags += `<video src=${el} loop muted autoPlay><video>`
-      });
-      defaults.innerHTML = tags;
-    }
-
-    //Promise.all()프로미스객체를 반환할때까지 기다린 후, 리졸브 트루가 반환되면 이후 동기화처리하는 함수
-
     let lenImg = imgs.length;
     let lenVid = vids.length;
-    function loadImg() {
-      return new Promise((resolve, reject) => {
-        let countImg = 0;
-        const imgDOM = defaults.querySelectorAll("img");
 
-        imgDOM.forEach((el) => {
-          el.onload = () => {
+    createDOM();
+
+    Promise.all([loadImg(), loadVid()]).then(result => {
+      const [loadedImg, loadedVid] = result;
+
+      //두함수의 반환값이 모두 true이면 (영상, 이미지가 모두 로딩완료되면)
+      if (loadedImg && loadedVid) {
+        console.log('mask-hide');
+        mask.classList.add('off');
+
+        setTimeout(() => {
+          mask.remove();
+          defaults.remove();
+        }, 2000)
+      }
+    })
+
+    function createDOM() {
+      imgs.forEach(src => {
+        tags += `<img src=${src} />`
+      })
+      vids.forEach(src => {
+        tags += `<video src=${src}></video>`
+      })
+      defaults.innerHTML = tags;
+    }
+    //Promise.all()프로미스객체를 반환할때까지 기다린 후, 리졸브 트루가 반환되면 이후 동기화처리하는 함수
+
+    function loadImg() {
+      return new Promise((res, rej) => {
+        let countImg = 0;
+        const imgDOM = defaults.querySelectorAll('img');
+
+        imgDOM.forEach(img => {
+          img.onload = () => {
             countImg++;
             if (countImg === lenImg) {
-              resolve(true);
+              res(true);
             }
           }
         });
@@ -64,10 +106,11 @@
     function loadVid() {
       return new Promise((resolve, reject) => {
         let countVid = 0;
-        const vidDOM = defaults.querySelectorAll("video");
+        const vidDOM = defaults.querySelectorAll('video');
 
-        vidDOM.forEach((el) => {
-          el.onload = () => {
+        vidDOM.forEach(vid => {
+          vid.onloadeddata = () => {
+            //비디오는 문제가 많아서 onload가 아니라 onloadeddata를 사용해야한다
             countVid++;
             if (countVid === lenVid) {
               resolve(true);
@@ -76,10 +119,7 @@
         });
       });
     }
-    Promise.all([loadImg(), loadVid()]).then(result => {
-      const [loadImg, loadVid] = result;
-      console.log(result);
-    });
+
   </script>
 </body>
 
@@ -89,5 +129,9 @@
  현재 비디오를 기존의 방식대로 넣게되면 검은색 배경, 혹은 이미지가 잠시 보이는 등으로 구현됩니다
  구현방법 1. 웹 서버에 업로드하고(예: 구글드라이브) url을 받아서 src에 url을 첨부하는 방법
  구현방법 2. 강제로 비디오와 큰 이미들을 먼저 캐싱하도록 index.html에 DOM요소를 넣는 방법
+
+ 강제로 이미지와 비디오를 캐싱하는 방법은 index.html에 DOM을 만들고(디폴트) 해당돔에 캐싱할 이미지와 비디오를 innerHTML로 넣어버림
+ 리얼DOM으로 이미지와 비디오가 캐싱중에는 마스크를 씌워서 로딩중임을 사용자에게 알리고 해당 로딩함수(loadImg,loadVid)를 통해서 로딩이 완료되는 시점을 찾습니다
+ 로딩이 완료되면 마스크를 오퍼시티0을 주며 안보이게 하고 이후에 index.html에 DOM(디폴트)으로 만든 디폴트와 마스크를 완전히 remove함  이렇게 되면 이미지와 비디오의 소스는 캐싱된 상태에서 보이지만 않게 되므로 
 
  -->
