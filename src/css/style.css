@@ -1,0 +1,399 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  width: 100%;
+  height: 200px;
+  padding: 0px 10vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  position: relative;
+  background-color: #ccc;
+}
+header h1 {
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+header h1 img {
+  width: 150px;
+}
+header h1 span {
+  font: 12px/1 "arial";
+  color: #777;
+  text-indent: 2px;
+}
+header nav {
+  width: 65%;
+  display: flex;
+  justify-content: flex-end;
+}
+header nav #gnb {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+header nav #gnb li a {
+  padding: 15px 0px;
+  font: 16px/1 "arial";
+  color: #999;
+  position: relative;
+  transition: 0.5s;
+}
+header nav #gnb li a::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background-color: #777;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: 0.5s;
+}
+header nav #gnb li a::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 1px;
+  background-color: #555;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transition: 0.5s;
+}
+header nav #gnb li a:hover, header nav #gnb li a.active {
+  color: #000;
+}
+header nav #gnb li a:hover::before, header nav #gnb li a.active::before {
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  opacity: 1;
+}
+header nav #gnb li a:hover::after, header nav #gnb li a.active::after {
+  width: 100%;
+  left: 0;
+}
+header .fa-bars {
+  font-size: 24px;
+  color: #444;
+  position: absolute;
+  right: 10vw;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+}
+header.main {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+header.main h1 span {
+  color: #fff;
+}
+header.main nav #gnb li a {
+  color: #fff;
+}
+
+@media screen and (max-width: 1599px) {
+  header nav {
+    width: 75%;
+  }
+}
+@media screen and (max-width: 1279px) {
+  header nav {
+    width: 25%;
+  }
+  header nav #gnb {
+    display: none;
+  }
+  header .fa-bars {
+    display: block;
+  }
+}
+footer {
+  width: 100%;
+  padding: 100px 10vw;
+  border-top: 1px solid #555;
+}
+footer .upper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+footer .upper h1 img {
+  width: 160px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+footer .upper nav {
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+footer .upper nav dl dt {
+  font: bold 15px/1 "arial";
+  color: #333;
+  margin-bottom: 50px;
+  letter-spacing: 1px;
+}
+footer .upper nav dl dd {
+  font: 15px/1 "arial";
+  color: #aaa;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+footer .lower {
+  margin-top: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+footer .lower p {
+  font: 14px/1 "arial";
+  color: #333;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+}
+footer .lower ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer .lower ul li {
+  cursor: pointer;
+}
+footer .lower .terms {
+  gap: 50px;
+  font: bold 14px/1 "arial";
+  color: #999;
+}
+footer .lower .sns {
+  gap: 30px;
+  color: #777;
+  font-size: 30px;
+}
+
+.content figure {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  opacity: 0;
+  transition: 1s;
+}
+.content figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.content figure h1 {
+  position: absolute;
+  left: 0vw;
+  bottom: -32px;
+  font: 200px/1 "arial";
+  color: #efefef;
+  opacity: 0;
+  transition: 1s 0.5s;
+}
+.content > .inner {
+  width: 80vw;
+  min-height: 700px;
+  margin: 100px auto;
+  position: relative;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: 1s 0.8s;
+}
+.content.on figure {
+  opacity: 1;
+}
+.content.on figure h1 {
+  left: 10vw;
+  opacity: 1;
+}
+.content.on > .inner {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+#visual {
+  width: 100%;
+  height: 100vh;
+  background-color: #333;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+#visual a {
+  width: 200px;
+  height: 50px;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Department .inner::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.Department .inner article {
+  width: 33.3333333333%;
+  float: left;
+  padding: 50px;
+  margin-bottom: 30px;
+}
+.Department .inner article .inner {
+  width: 100%;
+}
+.Department .inner article .inner .picFrame {
+  width: 100%;
+  height: 20vw;
+  position: relative;
+  margin-bottom: 20px;
+}
+.Department .inner article .inner .picFrame .reflect {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
+  filter: blur(15px) saturate(1.6);
+  transform: translate(0px 0px) scale(0.6);
+  opacity: 0;
+  z-index: -1;
+}
+.Department .inner article .inner .picFrame .reflect img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.Department .inner article .inner .picFrame .pic {
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: saturate(0.2);
+  transition: 0.5s;
+}
+.Department .inner article .inner .picFrame .pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.Department .inner article .inner .picFrame:hover .reflect {
+  opacity: 0.6;
+  transform: translate(30px, 30px) scale(0.9);
+}
+.Department .inner article .inner .picFrame:hover .pic {
+  filter: saturate(1.2);
+}
+.Department .inner article .inner h2 {
+  font: 20px/1 "arial";
+  color: #333;
+  margin-bottom: 10px;
+}
+.Department .inner article .inner p {
+  font: 14px/1 "arial";
+  color: #aaa;
+}
+
+.Youtube .inner article {
+  border-top: 1px solid #aaa;
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.Youtube .inner article .text {
+  width: 61%;
+}
+.Youtube .inner article .text h2 {
+  font: bold 22px/1 "arial";
+  color: #777;
+  margin-bottom: 20px;
+}
+.Youtube .inner article .text .txt {
+  display: flex;
+  flex: wrap;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.Youtube .inner article .text .txt p {
+  font: 14px/1.2 "arial";
+  color: #999;
+  margin-bottom: 70px;
+  word-break: keep-all;
+}
+.Youtube .inner article .text .txt .under {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.Youtube .inner article .text .txt .under p {
+  margin-bottom: 0;
+}
+.Youtube .inner article .text .txt .under span {
+  font: 12px/1 "arial";
+  color: orange;
+}
+.Youtube .inner article .pic {
+  width: 33%;
+  height: 200px;
+  background-color: #000;
+  filter: saturate(0);
+  transition: 0.5s;
+  position: relative;
+}
+.Youtube .inner article .pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.Youtube .inner article .pic .fa-youtube {
+  font-size: 80px;
+  position: absolute;
+  color: #444;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  opacity: 0;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.Youtube .inner article .pic:hover {
+  filter: saturate(1);
+}
+.Youtube .inner article .pic:hover .fa-youtube {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+/*# sourceMappingURL=style.css.map */
