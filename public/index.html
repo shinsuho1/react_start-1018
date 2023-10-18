@@ -13,6 +13,25 @@
 
 <body>
   <div id="root"></div>
+  <div class="defaults">검색봇이 SEO를 위해서 읽도록하는 텍스트데이터를 작성하는 곳 입니다</div>
+  <div class="mask">로딩중... 혹은 이미지 등으로 로딩을 표현하는 곳입니다</div>
+  <script>
+    const defaults = document.querySelector(".defaults");
+    const mask = document.querySelector(".mask");
+    let tags = "";
+    const baseURL = "https://shinsuho1.github.io/react_start-1018";
+    const imgs = [
+      baseURL + "/img/Community.jpg",
+      baseURL + "/img/Department.jpg",
+      baseURL + "/img/Gallery.jpg",
+      baseURL + "/img/Location.jpg",
+      baseURL + "/img/Youtube.jpg",
+      baseURL + "/img/Member.jpg",
+    ]
+    const vids = [
+      baseURL + "/img/vid.mp4"
+    ]
+  </script>
 </body>
 
 </html>

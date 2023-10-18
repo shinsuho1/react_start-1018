@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react_start-1018/static/css/main.e2595db2.css",
+    "main.js": "/react_start-1018/static/js/main.e289ce6a.js",
+    "index.html": "/react_start-1018/index.html",
+    "main.e2595db2.css.map": "/react_start-1018/static/css/main.e2595db2.css.map",
+    "main.e289ce6a.js.map": "/react_start-1018/static/js/main.e289ce6a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e2595db2.css",
+    "static/js/main.e289ce6a.js"
+  ]
+}

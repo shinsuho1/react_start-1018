@@ -18,7 +18,7 @@ export default function Header({ type }) {
         <header className={{ type }}>
             <h1>
                 <Link to="/">
-                    <img src={process.env.PUBLIC_URL + logoURL} alt="LOGO" />
+                    <img src={`${process.env.PUBLIC_URL}/img/logo_w.png`} alt="LOGO" />
                 </Link>
                 <span>Here comes logo is </span>
             </h1>
