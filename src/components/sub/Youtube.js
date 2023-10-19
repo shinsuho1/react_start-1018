@@ -4,26 +4,25 @@ import Pop from "../common/Pop";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { useSelector } from "react-redux";
+
 function Youtube() {
-    const [Vids, setVdis] = useState([]);
     const [Index, setIndex] = useState(0);
     const lineRef = useRef(null);
     const pop = useRef(null);
+    const Vids = useSelector((store) => store.youtubeReducer.youtube);
 
-    const getYoutube = async () => {
-        let key = "AIzaSyDgv-ToqwoVeH_iMBouKnpnuMXWjqXbK8I";
-        let playListId = "PLboMi2lmGKuASt2pNcNqdEgXbbOkKHR3y";
-        const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playListId}`;
-        axios.get(url).then((json) => { setVdis(json.data.items) })
-    }
-
-    useEffect(() => {
-        getYoutube();
-    }, [])
-    useEffect(() => {
-        console.log(Vids);
-    }, [Vids])
-
+    // const getYoutube = async () => {
+    //     let key = "AIzaSyDgv-ToqwoVeH_iMBouKnpnuMXWjqXbK8I";
+    //     let playListId = "PLboMi2lmGKuASt2pNcNqdEgXbbOkKHR3y";
+    //     const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playListId}`;
+    //     axios.get(url).then((json) => {
+    //         dispatch(setYoutube(json.data.items));
+    //     })
+    // }
+    // useEffect(() => {
+    //     getYoutube();
+    // }, [])
 
     return (
         <>

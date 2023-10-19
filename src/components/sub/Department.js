@@ -1,64 +1,21 @@
 import React from "react";
 import Layout from "../common/Layout";
-import { useState, useEffect } from "react";
-import axios from 'axios'
+
+import { useSelector } from "react-redux";
+
 function Department() {
 
-    // const [selectedTab, setselectedTab] = useState(selectedMenu || "menu1");
-    // const handlingTab = (menu) => {
-    //     setselectedTab(menu);
-    // }
     const path = process.env.PUBLIC_URL;
-    const [Members, setMembers] = useState([]);
-    const [Colors, setColors] = useState([]);
-
-    useEffect(() => {
-        axios.get(process.env.PUBLIC_URL + "/DB/member.json")
-            .then(
-                (json) => {
-                    setMembers(json.data.members);
-                    setColors(json.data.backGround);
-                }
-            )
-
-    }, [])
+    const Members = useSelector((store) => store.memberReducer.members);
+    /*
+    index.js에서 Provider로 store를 App.js에 연결하였으므로 어플리케이션 전역에서 스토어에 접근이 가능합니다
+    따라서 기존의 DB가 아닌 store있는 정보를 가지고오는 과저입니다
+    useSelector로 store에 접근한 뒤 store에 있는 memberReducer함수에 접근합니다
+    함수 안에있는 키인 members에 접근하면 reducer로 액션을 가져온 initMember가 존재하므로 기존과 같은 DB를 불러올 수 있는 것 입니다.
+    */
 
     return (
         <Layout name={"Department"}>
-            {/* <main>
-                <nav>
-                    <h1>TAB</h1>
-                    <ul>
-
-                        <li className={selectedTab === "menu1" ? "on" : ""}
-                            onClick={() => handlingTab("menu1")}>menu1
-                        </li>
-                        <li className={selectedTab === "menu2" ? "on" : ""}
-                            onClick={() => handlingTab("menu2")}>menu2
-                        </li>
-                        <li className={selectedTab === "menu3" ? "on" : ""}
-                            on Click={() => handlingTab("menu3")}>menu3
-                        </li>
-                        <li className={selectedTab === "menu4" ? "on" : ""}
-                            onClick={() => handlingTab("menu4")}>menu4
-                        </li>
-                    </ul>
-                </nav>
-                <section>
-                    <article className={selectedTab === "menu1" ? "on" : ""}>
-                        1
-                    </article>
-                    <article className={selectedTab === "menu2" ? "on" : ""}>
-                        2
-                    </article>
-                    <article className={selectedTab === "menu3" ? "on" : ""}>
-                        3
-                    </article>
-                    <article className={selectedTab === "menu4" ? "on" : ""}>
-                        4
-                    </article>
-                </section>
-            </main> */}
             {Members.map((el) =>
                 <article key={el.name}>
                     <div className="inner">
